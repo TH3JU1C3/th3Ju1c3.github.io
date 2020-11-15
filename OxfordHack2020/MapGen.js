@@ -293,19 +293,23 @@ function genMap(){
   let centreLocation = [Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))];
   let numMutations = Math.floor(Math.random()*baseRadius-1) + 2;
   try{
+  mapArray = generateLake(mapArray, baseRadius, centreLocation, 2,numMutations);
   mapArray = generateLake(mapArray, baseRadius, centreLocation, 2,numMutations);}
   catch(err){;}
   try{
   mapArray = generateRiver(mapArray, [Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))], 100);}
   catch(err){;}
-  for (let i = 0; i<2; i++){
+  try{
+  mapArray = generateRiver(mapArray, [Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))], 100);}
+  catch(err){;}
+  for (let i = 0; i<3; i++){
     try {
     mapArray = generateMountains(mapArray, baseRadius, [Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))], 3,numMutations);}
     catch(err){
       ;
     }
   }
-  for (let i = 0; i<4; i++){
+  for (let i = 0; i<6; i++){
     try{
     mapArray = generateMountains(mapArray, baseRadius-2, [Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))], 7,numMutations);
     }
@@ -314,7 +318,9 @@ function genMap(){
     }
   }
   try{
-    mapArray = generateVillage(mapArray,(Math.floor(Math.random()*3)+3),[Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))],true)
+    for (let i=0; i<2; i++){
+      mapArray = generateVillage(mapArray,(Math.floor(Math.random()*3)+3),[Math.floor(Math.random()*(mapArray[0].length)),Math.floor(Math.random()*(mapArray[0].length))],true)
+    }
   } catch(err) {
     document.write("XDDD")
   }
@@ -327,7 +333,6 @@ function genMap(){
     if (mapArray[i].length > 50){
       mapArray[i] = mapArray[i].slice(0,50);
     }
-    document.write(mapArray[i] + "<br>");
   }
   return mapArray;
 }
@@ -353,7 +358,6 @@ function noiseReturn(grassArray){
       }
       propensity = grassArray[j][i];
     }
-    document.write(grassArray[i] + "<br>");
   }
   return grassArray;
 }
