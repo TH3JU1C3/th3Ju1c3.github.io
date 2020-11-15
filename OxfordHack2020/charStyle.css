@@ -1,0 +1,66 @@
+    nav{
+      display:flex;
+      justify-content:center;
+    }
+    nav a{
+      margin:10pt;
+      color:black;
+    }
+    h1{
+      text-align:center;
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+    }
+    section{
+      padding:15pt;
+      display:inline-block;
+    }
+    .right{
+      float:right;
+      width:40%;
+    }
+    .left{
+      float:left;
+      width:40%;
+    }
+    h2{
+      text-align:center;
+    }
+	canvas {
+		border: 1px solid black;
+	}
+	body {
+		margin: 5%;
+	}
+	main {
+		padding-left: 20pt;
+		display: inline-block;
+        font-family: "Lucida Console", Courier, monospace;
+		width: 70%;
+	}
+	aside {
+        padding:5px;
+		display: inline-block;
+		width: 25%;
+		float: right;
+	}
+	aside button {
+        font-family: "Lucida Console", Courier, monospace;
+		width: 80%;
+        color: white;
+        border-radius:17px;
+        background-color:#454545;
+        transition-duration:0.2s;
+	}
+	aside button.half {
+		width: 39%;
+        word-wrap: break-word;
+        border-radius:10px;
+	}
+    aside button:hover{
+        background-color:white;
+        color:#454545;
+    }
+	.asset, .hidden {
+		display: none;
+	}

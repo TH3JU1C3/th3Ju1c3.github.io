@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+	<head>
+		<title>DND Character Generator - OxfordHack</title>
+		<link rel="stylesheet" href="charStyle.css">
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="OxfordHack-Main.html">Main Page</a>
+				<a href="OxfordHack-MapGen.html">Generate A Map</a>
+				<a href="OxfordHack-CharGen.html">Generate A Character</a>
+				<a href="OxfordHack-ItemGen.html">Generate An Item</a>
+			</nav>
+			<h1>Character Generator</h1>
+		</header>
+		<main>
+			<section class="left">
+				<h2>Character Meta</h2>
+				<ul>
+					<li id="lstCharName">Character Name:</li>
+					<li id="lstRace">Race:</li>
+					<li id="lstClass">Class:</li>
+					<li id="lstLevel">Level:</li>
+					<li id="lstBackground">Background:</li>
+					<li id="lstAlignment">Alignment:</li>
+				</ul>
+			</section>
+			<section class="right">
+				<h2>Attributes</h2>
+				<ul>
+					<li id="lstSTR">Strength:</li>
+					<li id="lstDEX">Dexterity:</li>
+					<li id="lstCON">Constitution:</li>
+					<li id="lstINT">Intelligence:</li>
+					<li id="lstWIS">Wisdom:</li>
+					<li id="lstCHA">Charisma:</li>
+				</ul>
+			</section>
+			<section class="left">
+				<h2>Derived Stats</h2>
+				<ul>
+					<li id="lstProf">Proficiency:</li>
+					<li id="lstHP">Hit Points:</li>
+					<li id="lstHitDie">Hit Dice:</li>
+					<li id="lstHitDieNumber">Hit Dice Number:</li>
+					<li id="lstSpeed">Speed:</li>
+					<li id="lstAC">Armour Class:</li>
+				</ul>
+			</section>
+			<section class="right">
+				<h2>Saving Throws</h2>
+				<ul>
+					<li id="lstSTRsav">Strength:</li>
+					<li id="lstDEXsav">Dexterity:</li>
+					<li id="lstCONsav">Constitution:</li>
+					<li id="lstINTsav">Intelligence:</li>
+					<li id="lstWISsav">Wisdom:</li>
+					<li id="lstCHAsav">Charisma:</li>
+				</ul>
+			</section>
+			<section class="left">
+				<h2>Skills</h2>
+				<ul>
+					<li id="lstSklDexAcr">Acrobatics (Dex):</li>
+					<li id="lstSklWisAnm">Animal Handling (Wis):</li>
+					<li id="lstSklIntArc">Arcana (Int):</li>
+					<li id="lstSklStrAth">Athletics (Str):</li>
+					<li id="lstSklChaDec">Deception (Cha):</li>
+					<li id="lstSklIntHis">History (Int):</li>
+					<li id="lstSklWisIns">Insight (Wis):</li>
+					<li id="lstSklChaItm">Intimidation (Cha):</li>
+					<li id="lstSklIntInv">Investigation (Int):</li>
+					<li id="lstSklWisMed">Medicine (Wis):</li>
+					<li id="lstSklIntNat">Nature (Int):</li>
+					<li id="lstSklWisPrc">Perception (Wis):</li>
+					<li id="lstSklChaPfm">Performance (Cha):</li>
+					<li id="lstSklChaPrs">Persuasion (Cha):</li>
+					<li id="lstSklIntRel">Religion (Int):</li>
+					<li id="lstSklDexSoh">Sleight of Hand (Dex):</li>
+					<li id="lstSklDexStl">Stealth (Dex):</li>
+					<li id="lstSklWisSur">Survival (Wis):</li>
+				</ul>
+			</section>
+		</main>
+		<aside>
+			<button type="button" onclick="generateCharacter();">Generate Character!</button>
+			<button type="button" onclick="changeName();">Change Name</button>
+			<button class="half" type="button" onclick="changeRace(1);">Forward <br>Race</button>
+			<button class="half" type="button" onclick="changeRace(-1);">Previous <br>Race</button>
+			<button class="half" type="button" onclick="changeClass(1);">Forward <br>Class</button>
+			<button class="half" type="button" onclick="changeClass(-1);">Previous <br>Class</button>
+			<button class="half" type="button" onclick="changeLevel(1);">Increase <br>Level</button>
+			<button class="half" type="button" onclick="changeLevel(-1);">Decrease <br>Level</button>
+			<button class="half" type="button" onclick="changeBackground(1);">Forward <br>Background</button>
+			<button class="half" type="button" onclick="changeBackground(-1);">Previous <br>Background</button>
+			<button class="half" type="button" onclick="changeAlignment(1);">Next <br>Alignment</button>
+			<button class="half" type="button" onclick="changeAlignment(-1);">Previous <br>Alignment</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Str');">Increase <br>Strength</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Str');">Decrease <br>Strength</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Dex');">Increase <br>Dexterity</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Dex');">Decrease <br>Dexterity</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Con');">Increase <br>Constitution</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Con');">Decrease <br>Constitution</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Int');">Increase <br>Intelligence</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Int');">Decrease <br>Intelligence</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Wis');">Increase <br>Wisdom</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Wis');">Decrease <br>Wisdom</button>
+			<button class="half" type="button" onclick="changeAttribute(1,'Cha');">Increase <br>Charisma</button>
+			<button class="half" type="button" onclick="changeAttribute(-1,'Cha');">Decrease <br>Charisma</button>
+			<button type="button" onclick="dlCharacterJSON();">Download Character!</button>
+			<input  type="file" id="uploader" value="Import" accept="application/json" />
+			<button type="button" onclick="uplCharacterJSON();">Upload Character</button>
+		</aside>
+		<a id="downloadAnchorElem" style="display:none"></a>
+		<script src="charGen.js"></script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+	<head>
+		<title>DND Item Generator - OxfordHack</title>
+		<link rel="stylesheet" href="charStyle.css">
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="OxfordHack-Main.html">Main Page</a>
+				<a href="OxfordHack-MapGen.html">Generate A Map</a>
+				<a href="OxfordHack-CharGen.html">Generate A Character</a>
+				<a href="OxfordHack-ItemGen.html">Generate An Item</a>
+			</nav>
+			<h1>Item Generator</h1>
+		</header>
+		<main>
+			<p id="Item">Put Item here</p>
+			<ul>
+				<li id="lstWeight" class="notHidden">Weight</li>
+				<li id="lstDam" class="hidden">Damage</li>
+				<li id="lstArm" class="hidden">AC Bonus</li>
+				<li id="lstHeal" class="hidden">Healing properties</li>
+			</ul>
+		</main>
+		<aside>
+			<button type="button" onclick="generateItem();">Generate Item!</button>
+			<button type="button" onclick="generateTrinket();">Generate Trinket!</button>
+			<button type="button" onclick="generateWeapon();">Generate Weapon!</button>
+			<button type="button" onclick="generateArmour();">Generate Armour!</button>
+			<button type="button" onclick="generateFood();">Generate Food!</button>
+		</aside>
+		<script src="itemGen.js"></script>
+	</body>
+</html>
