@@ -61,24 +61,34 @@ function generateLake(mapArray,radius,topLeft,tileType,variations){
 }
 
 function generateMountains(mapArray,radius,topLeft,tileType,variations){
+  let pathway = false
+  let pathwayLevel = 0
+  if (tileType == 3 && Math.floor(Math.random()*4)==1){
+      pathway = true
+      pathwayLevel = Math.floor(Math.random()*radius)
+  } 
   //mapArray[centre[0]][centre[1]] = tileType;
   for (let variation = 0; variation < variations; variation++){
     for (let i=0; i < radius*2; i++){
       for (let j=0; j < radius*2; j++){
         if (topLeft[0]+i < 0){
-          topLeft[0]++
+          topLeft[0]++;
         }
         if (topLeft[1]+j < 0){
-          topLeft[1]++
+          topLeft[1]++;
         }
         if (topLeft[0]+i > 49){
-          topLeft[0]--
+          topLeft[0]--;
         }
         if (topLeft[1]+j > 49){
-          topLeft[1]--
+          topLeft[1]--;
         }
         if (topLeft[0]+i < 50 && topLeft[1]+j < 50 && mapArray[topLeft[0]+i][topLeft[1]+j] == 1){
-          mapArray[(topLeft[0]+i)][(topLeft[1]+j)] = tileType;
+          if (pathway == true && i==pathwayLevel){
+            mapArray[(topLeft[0]+i)][(topLeft[1]+j)] = 4;
+          } else{
+            mapArray[(topLeft[0]+i)][(topLeft[1]+j)] = tileType;
+          }
         }
       }
     }

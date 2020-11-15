@@ -22,7 +22,9 @@ function DisplayMap()
     } else {
         tiles.src = "Assets/tileSet/tileset.png";
     }
+
     mapArray = genMap();
+    grassArray = noiseReturn(grassArray);
 
     console.log(mapArray);
 
@@ -30,12 +32,11 @@ function DisplayMap()
     {
         for (let x = 0; x < mapArray.length; x++)
         {
-            context.drawImage(tiles, 16 * CalculateTile(x, y), 0, 16, 16, 16 * x, 16 * y, 16, 16);
-            /*if (grassArray[x][y] == 0) {
+            if (grassArray[x][y] == 0) {
                 context.drawImage(tiles, 16 * CalculateTile(x, y), 0, 16, 16, 16 * x, 16 * y, 16, 16);
             } else {
-                context.drawImage(tiles, 16 * CalculateTile(x, y), 0 , 16, 16, 16 * x, 16 * y, 16, 16);
-            }*/
+                context.drawImage(tiles, 16 * CalculateTile(x, y), 16 , 16, 16, 16 * x, 16 * y, 16, 16);
+            }
         }
     }
 }
@@ -158,8 +159,195 @@ function CalculateTile(x,y)
 
 
             return 2;
-        case 3:
+        case 3: //Mountains
+
             if (v[1] == 3) {
+                if (v[7] == 3) {
+                    if (v[3] == 3) {
+                        if (v[5] == 3) {
+                            //Corners
+                            if (v[0] == 3) {
+                                if (v[2] == 3) {
+                                    if (v[6] == 3) {
+                                        if (v[8] == 3) {
+                                            return 137;
+                                        } else {
+                                            return 147;
+                                        }
+                                    } else {
+                                        if (v[8] == 3) {
+                                            return 146;
+                                        } else {
+                                            return 140;
+                                        }
+                                    }
+                                } else {
+                                    if (v[6] == 3) {
+                                        if (v[8] == 3) {
+                                            return 145;
+                                        } else {
+                                            return 138;
+                                        }
+                                    } else {
+                                        if (v[8] == 3) {
+                                            return 142;
+                                        } else {
+                                            return 93;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (v[2] == 3) {
+                                    if (v[6] == 3) {
+                                        if (v[8] == 3) {
+                                            return 144;
+                                        } else {
+                                            return 143;
+                                        }
+                                    } else {
+                                        if (v[8] == 3) {
+                                            return 87;
+                                        } else {
+                                            return 94;
+                                        }
+                                    }
+                                } else {
+                                    if (v[6] == 3) {
+                                        if (v[8] == 3) {
+                                            return 143;
+                                        } else {
+                                            return 95;
+                                        }
+                                    } else {
+                                        if (v[8] == 3) {
+                                            return 96;
+                                        } else {
+                                            return 132;
+                                        }
+                                    }
+                                }
+                            }
+
+                        } else {
+                            if (v[0] != 3) {
+                                if (v[6] != 3) {
+                                    return 132;
+                                } else {
+                                    return 135;
+                                }
+                            } else {
+                                if (v[6] != 3) {
+                                    return 141;
+                                } else {
+                                    return 138;
+                                }
+                            }
+                        }
+                    } else {
+                        if (v[5] == 3) {
+                            if (v[2] != 3) {
+                                if (v[8] != 3) {
+                                    return 132;
+                                } else {
+                                    return 133;
+                                }
+                            } else {
+                                if (v[8] != 3) {
+                                    return 139;
+                                } else {
+                                    return 136;
+                                }
+                            }
+                        } else {
+                            return 132;
+                        }
+                    }
+                } else {
+                    if (v[3] == 3) {
+                        if (v[5] == 3) {
+                            if (v[0] != 3) {
+                                if (v[2] != 3) {
+                                    return 132;
+                                } else {
+                                    return 139;
+                                }
+                            } else {
+                                if (v[2] != 3) {
+                                    return 141;
+                                } else {
+                                    return 140;
+                                }
+                            }
+                        } else {
+                            if (v[0] != 3) {
+                                return 132;
+                            } else {
+                                return 141;
+                            }
+                        }
+                    } else {
+                        if (v[5] == 3) {
+                            if (v[2] != 3) {
+                                return 132;
+                            } else {
+                                return 139;
+                            }
+                        } else {
+                            return 132;
+                        }
+                    }
+                }
+            } else {
+                if (v[7] == 3) {
+                    if (v[3] == 3) {
+                        if (v[5] == 3) {
+                            if (v[6] != 3) {
+                                if (v[8] != 3) {
+                                    return 132;
+                                } else {
+                                    return 133;
+                                }
+                            } else {
+                                if (v[8] != 3) {
+                                    return 135;
+                                } else {
+                                    return 134;
+                                }
+                            }
+                        } else {
+                            if (v[6] != 3) {
+                                return 132;
+                            } else {
+                                return 135;
+                            }
+                        }
+                    } else {
+                        if (v[5] == 3) {
+                            if (v[8] != 3) {
+                                return 132;
+                            } else {
+                                return 133;
+                            }
+                        } else {
+                            return 132;
+                        }
+                    }
+                } else {
+                    if (v[3] == 3) {
+                        return 132;
+                    } else {
+                        if (v[5] == 3) {
+                            return 132;
+                        } else {
+                            return 107;
+                        }
+                    }
+                }
+            }     
+
+
+
+            /*if (v[1] == 3) {
                 if (v[7] == 3) {
                     if(v[3] == 3){
                         if (v[5] == 3) {
@@ -193,11 +381,9 @@ function CalculateTile(x,y)
                         } else {
                             return 135;
                         }
-                    } else {
                     }
-                } else {
-                }
-            }
+                } 
+            }*/
             return 132;      
         case 4:         //paths
             //v[0] != 4 && v[1] != 4 && v[2] != 4 && v[3] == 4 && v[5] == 4 && v[6] != 4 && v[7] != 4 && v[8] != 4
@@ -246,7 +432,7 @@ function CalculateTile(x,y)
                                         }
                                     } else {
                                         if (v[8] == 4) {
-                                            return 87;
+                                            return 136;
                                         } else {
                                             return 94;
                                         }
