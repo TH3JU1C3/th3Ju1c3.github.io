@@ -17,6 +17,11 @@ function TestFunction()
 
 function DisplayMap()
 {
+    if (document.getElementById("sepiaBox").checked) {
+        tiles.src = "Assets/tileSet/tilesetSepia.png";
+    } else {
+        tiles.src = "Assets/tileSet/tileset.png";
+    }
     mapArray = genMap();
 
     console.log(mapArray);
@@ -50,7 +55,7 @@ function CalculateTile(x,y)
     //Love me some binary trees
     switch (v[4])
     {
-        case 1:
+        case 1: //Grass
             if (v[0] == 4 && v[1] == 4 && v[2] == 4 && v[3] == 4 && v[5] == 4 && v[6] == 4 && v[7] == 4 && v[8] == 4) {
                 return 92;
             }else {
@@ -154,6 +159,45 @@ function CalculateTile(x,y)
 
             return 2;
         case 3:
+            if (v[1] == 3) {
+                if (v[7] == 3) {
+                    if(v[3] == 3){
+                        if (v[5] == 3) {
+                            return 137;
+                        } else {
+                            return 138;
+                        }
+                    }else {
+                        if (v[5] == 3) {
+                            return 136;
+                        }
+                    }
+                } else {
+                    if (v[3] == 3) {
+                        if (v[5] == 3) {
+                            return 140;
+                        } else {
+                            return 141;
+                        }
+                    } else {
+                        if (v[5] == 3) {
+                            return 139;
+                        }
+                    }
+                }
+            } else {
+                if (v[7] == 3) {
+                    if (v[3] == 3) {
+                        if (v[5] == 3) {
+                            return 134;
+                        } else {
+                            return 135;
+                        }
+                    } else {
+                    }
+                } else {
+                }
+            }
             return 132;      
         case 4:         //paths
             //v[0] != 4 && v[1] != 4 && v[2] != 4 && v[3] == 4 && v[5] == 4 && v[6] != 4 && v[7] != 4 && v[8] != 4
@@ -350,7 +394,7 @@ function CalculateTile(x,y)
             } else {
                 return 118;
             }
-        case 6:
+        case 6: //Houses
             return Math.floor(Math.random() * 6) + 3;
             return 3;
         case 7: //Trees

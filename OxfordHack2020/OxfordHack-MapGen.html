@@ -14,11 +14,16 @@
 				<a href="OxfordHack-CharGen.html">Generate A Character</a>
 				<a href="OxfordHack-ItemGen.html">Generate An Item</a>
 			</nav>
+			<h1>Oxford Hack 2020 - D&amp;D Generator Suite</h1>
 		</header>
 		<main>
+			<h2>Map Generator</h2>
 			<canvas id="generatorScreen" width="800px" height="800px"></canvas>
 		</main>
 		<aside>
+			<input type="checkbox" id="sepiaBox">
+			<label for="sepiaBox">Sepia</label>
+			<br>
 			<button type="button" onclick="DisplayMap();">Generate Map</button>
 			<button type="button" onclick="Download(canvas, 'map.png');">Download Map</button>
 		</aside>

@@ -49,6 +49,9 @@ class Character {
 		this.intSaveThrow = this.makeSkill(this.int);
 		this.wisSaveThrow = this.makeSkill(this.wis);
 		this.chaSaveThrow = this.makeSkill(this.cha);
+		
+		this.spellSaveDC = this.calculateSpellSaveDC();
+		this.spellAttackMod = this.calculateSpellAttackMod();
 		//Update skills if proficient
 		this.addProficiency();
 		
@@ -298,6 +301,11 @@ class Character {
 			case "Warlock":
 				return 8;
 				break;
+			case "Fighter":
+			case "Paladin":
+			case "Ranger":
+				return 10;
+				break;
 			case "Barbarian":
 				return 12;
 				break;
@@ -433,6 +441,50 @@ class Character {
 		}
 	}
 
+
+	calculateSpellSaveDC(){
+		switch(this.charClass) {
+			case "Warlock":
+			case "Sorcerer":
+			case "Bard":
+			case "Paladin":
+				return 8 + this.makeSkill(this.cha) + this.proficiency;
+				break;
+			case "Wizard":
+				return 8 + this.makeSkill(this.int) + this.proficiency;
+				break;
+			case "Cleric":
+			case "Druid":
+			case "Ranger":
+				return 8 + this.makeSkill(this.wis) + this.proficiency;
+				break;
+			default:
+				return "N/A";
+				break;
+		}
+	}
+	
+	calculateSpellAttackMod(){
+		switch(this.charClass) {
+			case "Warlock":
+			case "Sorcerer":
+			case "Bard":
+			case "Paladin":
+				return this.makeSkill(this.wis) + this.proficiency;
+				break;
+			case "Wizard":
+				return this.makeSkill(this.wis) + this.proficiency;
+				break;
+			case "Cleric":
+			case "Druid":
+			case "Ranger":
+				return this.makeSkill(this.wis) + this.proficiency;
+				break;
+			default:
+				return "N/A";
+				break;
+		}
+	}
 }
 
 let character = new Character();
@@ -599,6 +651,9 @@ function updateCharacter(character) { // Changes Derived Stats
 	//Update skills if proficient
 	character.addProficiency();
 	character.AC = character.getAC();
+	
+	character.spellSaveDC = character.calculateSpellSaveDC();
+	character.spellAttackMod = character.calculateSpellAttackMod();
 }
 
 function displayCharacter(character){ // updates HTML of character stats so User can see
@@ -653,4 +708,7 @@ function displayCharacter(character){ // updates HTML of character stats so User
 	document.getElementById("lstINTsav").innerHTML = "Intelligence: "+character.intSaveThrow;
 	document.getElementById("lstWISsav").innerHTML = "Wisdom: "+character.wisSaveThrow
 	document.getElementById("lstCHAsav").innerHTML = "Charisma: "+character.chaSaveThrow;
+	
+	document.getElementById("lstSplSavDC").innerHTML = "Spell Save DC: "+character.spellSaveDC;
+	document.getElementById("lstSplAtkMod").innerHTML = "Spell Attack Modifier: "+character.spellAttackMod;
 }

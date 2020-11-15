@@ -30,7 +30,8 @@
 		border: 1px solid black;
 	}
 	body {
-		margin: 5%;
+		margin-left: 5%;
+		margin-right: 5%;
 	}
 	main {
 		padding-left: 20pt;

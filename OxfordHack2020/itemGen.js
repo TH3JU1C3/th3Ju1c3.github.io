@@ -79,7 +79,7 @@ class Item {
 
 	makeDamage() {
 		let finalDamage = "";
-		let sidesOfDice = ["d4", "d6", "d12", "d20"];
+		let sidesOfDice = ["d4", "d6", "d10", "d12", "d20"];
 		let amountOfThrows = Math.floor(Math.random() * 6);
 
 		let randSide = Math.floor(Math.random() * sidesOfDice.length);
