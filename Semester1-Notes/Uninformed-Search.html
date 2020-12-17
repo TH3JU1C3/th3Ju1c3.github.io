@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uninformed Search Notes</title>
+		<link rel="stylesheet" href="./css/style1.css"/>
+	</head>
+	<body>
+		<main>
+			<h1>Uninformed Search</h1>
+			<p>
+				Uninformed Search is a method of finding a path through a graph from a start node to a goal node. They can only explore different states and check if a state is a goal state.
+			</p>
+			<section>
+				<h2>Agents</h2>
+				<p>
+					An agent is a computer system that is capable of autonomous action in some environment. They work by observing the environment (through some sensor) and then perform actions (through some actuator) that change the environment until a goal has been reached. A rational agent will perform the action that will maximise its utility.
+				</p>
+				<h3>Reflex Agents</h3>
+				<p>
+					A reflex agent will only choose actions based on its current observation of the environment. They do not remember past environments or plan for the future. Often, reflex agents do not act rationally, it will depend on the initial environment.
+				</p>
+				<h3>Planning Agents</h3>
+				<p>
+					A planning agent is one that will look for possible future environments that may occur down the line and account for them. They may optionally choose the optimal solution. These are the types of agent we will use in search problems.
+				</p>
+			</section>
+			<section>
+				<h2>How to Search</h2>
+				<p>
+					Search problems have a list of States (known as the State Space), where an Agent starts at an Initial State and must make various Actions until it reaches a Goal State. A State is a description of the current environment. A transition model describes the effect of taking an action (e.g. Move from A to B, taking 10 minutes). Search problems may be described as a State Space Graph or as a Search Tree.
+				</p>
+				<p>
+					A sequence of actions forms a path. A path from the initial state to a goal state is a solution. A path with the lowest cost is an optimal solution.
+				</p>
+				<h3>How Search algorithms build Search Trees</h3>
+				<p>
+					First a node is "expanded" (this is when an agent observes the environment) - consider which actions can be taken and generate child nodes based on the resulting states. Generated nodes are called "reached". These states are added to the "frontier". A single node in the frontier is then explored (this is when an agent performs an action that affects environment). The process repeats until a goal state is reached or the frontier is empty (i.e. no solution).
+				</p>
+				<p>
+					Redundant paths may occur if there are multiple paths to reach a specific node or if there is a cycle (a path that starts and ends at the same node). Redundant paths may be avoided if the algorithm remembers which nodes have been explored and new nodes only being added to the frontier if they have never been explored. Algorithms which remember are called "Graph Search", while those that don't are called "Tree Search".
+				</p>
+				<p><code>
+					<b>function</b> TREE-SEARCH(<i>problem</i>) <b>returns</b> a solution, or failure<br>
+					initialise the frontier using the initial state of <i>problem</i><br>
+					<b>loop do</b><br>
+					&emsp;<b>if</b> the frontier is empty <b>then return</b> failure<br>
+					&emsp;choose a leaf node and remove it from the frontier<br>
+					&emsp;<b>if</b> the node contains a goal state <b>then return</b> the corresponding solution<br>
+					&emsp;expand the chosen node,adding the resulting nodes to the frontier
+				</code></p>
+				<p><code>
+					<b>function</b> GRAPH-SEARCH(<i>problem</i>) <b>returns</b> a solution, or failure<br>
+					initialise the frontier using the initial state of <i>problem</i><br>
+					<b><i>initialise the explored set to be empty</i></b><br>
+					<b>loop do</b><br>
+					&emsp;<b>if</b> the frontier is empty <b>then return</b> failure<br>
+					&emsp;choose a leaf node and remove it from the frontier<br>
+					&emsp;<b>if</b> the node contains a goal state <b>then return</b> the corresponding solution<br>
+					&emsp;<b><i>add the node to the explored set</i></b><br>
+					&emsp;expand the chosen node,adding the resulting nodes to the frontier<br>
+					&emsp;&emsp;<b><i>only if not in the frontier or explored set</i></b>
+				</code></p>
+				<h3>Algorithm Performance</h3>
+				<p>
+					There are 4 measures of algorithm performance, they are:
+					<ol>
+						<li>Completeness</li>
+						<ul>
+							<li>Is the algorithm guaranteed to find a solution if one exists and to correctly report a failure if one doesen't</li>
+						</ul>
+						<li>Optimality</li>
+						<ul>
+							<li>Will the algorithm find an optimal solution</li>
+						</ul>
+						<li>Time Complexity</li>
+						<ul>
+							<li>How long will it take (measured in nodes)</li>
+						</ul>
+						<li>Space Complexity</li>
+						<ul>
+							<li>How much memory is needed (measured in nodes)</li>
+						</ul>
+					</ol>
+				</p>
+				<p>
+					Complexity is often used in conjuction with the maximum branching factor (b), depth of the shallowest goal node (d), and maximum length of any path (m).
+				</p>
+			</section>
+			<section>
+				<h2>Search Algorithms</h2>
+				<p>
+					Here are a list of uninformed search algorithms and their properties. Search algorithms may have an early or late check. By which, an algorithm can check if a child node is a goal state before it is added to the frontier (early check) or the algorithm checks only after it has been explored (late check). Of these, Uniform Cost Search is the only one that must be late check, the others can be either.
+				</p>
+				<h3>Breadth First Search</h3>
+				<p>
+					In this algorithm, the shallowest node is the frontier is always explored first. If multiple of these nodes exist, then choose randomly.
+				</p>
+				<p>
+					This algorithm is complete and optimal if all actions have identical cost. It has a Time and Space Complexity of O(b<sup>d</sup>) - which is a lot.
+				</p>
+				<h3>Depth First Search</h3>
+				<p>
+					In this algorithm, the deepest node is the frontier is always explored first. If multiple of these nodes exist, then choose randomly.
+				</p>
+				<p>
+					This algorithm is complete for finite tree-like state spaces (i.e. no cycles) but it is not optimal. It has a worst case Time Complexity of O(b<sup>m</sup>) and Space Complexity of O(bm). The improved Space Complexity is the main selling point of depth first.
+				</p>
+				<h3>Iterative Deepening Search</h3>
+				<p>
+					Run depth first search with the maximum depth = 1 and iteratively increase the maximum depth until a solution is found. This is a sort of cross between breadth-first and depth-first.
+				</p>
+				<p>
+					This algorithm is complete for finite tree-like state spaces (i.e. no cycles) and optimal if all actions have identical cost. It has a Time Complexity of O(b<sup>d</sup>) for problems with solutions. The Space Complexity is O(bd) for problems with solutions. Without solutions, replace the d with m (as all nodes must be expanded).
+				</p>
+				<h3>Bidirectional Search</h3>
+				<p>
+					Run iterative deepening search from start and goal, until the frontiers collide.
+				</p>
+				<p>
+					All properties are the same as iterative deepening search, except that the Time Complexity is O(2b<sup>d/2</sup>). This is much less than O(b<sup>d</sup>)
+				</p>
+				<h3>Uniform Cost Search (Dijkstra's algo)</h3>
+				<p>
+					In this algorithm, explore the cheapest node in the frontier. This is the only uninformed search algorithm in this list that considers the cost of actions.
+				</p>
+				<p>
+					Dijkstra's Algorithm is complete (if there is no cycle with zero cost) and optimal. It has a Time and Space Complexity of O(b<sup>1+(C*/&epsilon;)</sup>). Where C* is the cost of the optimal solution and &epsilon; is the minimum action cost, where &epsilon; &gt; 0.
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

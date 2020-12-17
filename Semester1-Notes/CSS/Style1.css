@@ -1,0 +1,30 @@
+table, td, th {
+	border: 1px solid black;
+}
+td {
+	text-align: center;
+}
+body {
+	font-size: 125%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+sub, sup {
+	font-size: 65%;
+}
+img {
+	width: 100%;
+	display: inline;
+}
+footer {
+	font-size: 75%;
+}
+figure {
+	border: 1px solid black;
+	display: inline-block;
+	width: 40%;
+}
+figcaption {
+	border: 1px solid black;
+	/*text-align: center;*/
+}
