@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Data Representation Notes</title>
+		<link rel="stylesheet" href="./css/style1.css"/>
+	</head>
+	<body>
+		<main>
+			<h1>Data Representation</h1>
+			<p>
+				Computers represent data in binary. Data can include positive (unsigned) integers, signed integers, characters and strings, real numbers, program instructions and memory addresses. The program determines the type of data that is used.
+			</p>
+			<h2>Storing Data</h2>
+			<p>
+				Binary Digits are called bits, they can be grouped together in sequences (known as a cell). A cell of 8 bits is called a byte, 16 bits is called a word and 4 bits is called a nibble. The data store consists of a collection of cells. Each cell can be accessed by looking up its address. Addresses are unsigned integers. A cell is the smallest addressable unit of a store. The address space is the amount of unique addresses the processor can handle, 32 bit processors can address 2<sup>32</sup> positions (or 4 <abbr title="Gibibyte">Gb</abbr> of memory), while 64 bit can address 2<sup>64</sup> positions (or 16 <abbr title="Exbibyte">Eb</abbr> of memory).
+			</p>
+			<h2>Representing Integers</h2>
+			<p>
+				Unsigned integers are stored in just straight up binary, where 00<sub>16</sub> is 0<sub>10</sub> and FF<sub>16</sub> is 255<sub>10</sub>. However, other methods may include <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal"><abbr title="Binary-coded decimal">BCD</abbr></a> used in the ENIAC or Binary-coded sexagesimal (6 bits for base 60) which is used sometimes to tell the time and for angles or <a href="https://en.wikipedia.org/wiki/Gray_code">Gray codes</a> used in digital TV.
+			</p>
+			<p>
+				Signed integers can also be stored in a multitude of ways depending on the architecture. One method is the Sign and Magnitude method, where the most significant bit denotes the sign (0 for postive, 1 for negative) and the rest of the bits denote the magnitude. For Example 01111111<sub>2</sub> represents +127<sub>10</sub>, 00000000<sub>2</sub> represents +0<sub>10</sub>, 10000000<sub>2</sub> represents -0<sub>10</sub> and 11111111<sub>2</sub> represents -127<sub>10</sub>. This has the advantage of being easy to read and being symmetric around zero, but this also means that there are 2 representations of zero and arithmetic is too complicated. A way to simplify the arithmetic would be to use 1's compliment where negative numbers have swapped the 1's and 0's (so 11111111<sub>2</sub> represents -0<sub>10</sub>, 11111110<sub>2</sub> is -1<sub>10</sub> and 10000000<sub>2</sub> represents -127<sub>10</sub>). However this method still results in 2 representations of 0. 2's compliment solves this issue. It works similar to 1's compliment except for negative numbers it starts at -1 instead of -0 (so 11111111<sub>2</sub> represents -1<sub>10</sub>, 11111110<sub>2</sub> is -2<sub>10</sub> and 10000000<sub>2</sub> represents -128<sub>10</sub>). To write -37<sub>10</sub> in binary following the 2's compliment representation, you first write the bit pattern for +37<sub>10</sub> (00100101<sub>2</sub>) then swap the bits (as in 1's compliment to become 11011010) and then add one to the result to become 11011011<sub>2</sub>.
+			</p>
+			<h2>Representing characters and strings</h2>
+			<p>
+				Lookup <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> and <a href="https://en.wikipedia.org/wiki/Unicode">UNICODE</a>
+			</p>
+			<h2>Representing Real Numbers</h2>
+			<p>
+				Representing Real Numbers is a challenge as there are more real numbers between any two points than there are integers. A real number such as -16.37 can be represented in standard form (or scientific notation) as -1.637 &times; 10<sup>1</sup>. The first part of the standard form (in this case the -1.637) is called the mantissa (or significand) it is a normalised value between 1 and less than the base that can be positive or negative (except for 0). The second part (in this case 10) is the base and the third part (in this case 1) is the exponent. Using standard form is helpful as it normalises the input, is accurate to the level of precision and is simple to use. However, it is not as good as numbers that can be represented exactly (such as 1/3 or pi) and as such rounding errors may increase in complex calculations.
+			</p>
+			<p>
+				Real numbers are represented in binary using IEEE Standard 754. There are 2 basic formats: Single precision (4 bytes) and double precision (8 bytes). The first bit denotes the sign, the next 8 bits (in single precision) denote the exponent and the last 23 bits (single precision) denote the mantissa. Note that while the mantissa is stored in 23 bits, it actually has precision to 24 bits as the first bit of a mantissa (the bit before the decimal point) is always implied as a 1. In the exponent a bias is added (+127 in the case of single precision) so this must be removed when converting to decimal.
+			</p>
+		</main>
+	</body>
+</html>

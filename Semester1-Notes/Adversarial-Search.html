@@ -7,6 +7,72 @@
 	<body>
 		<main>
 			<h1>Adversarial Search</h1>
+			<p>
+				Ocassionally, some problems (i.e. games) have multiple opposing players. For zero sum games, using adverserial search can help you find the optimal strategy that you can make in a game.
+			</p>
+			<section>
+				<h2>Minimax Algorithm</h2>
+				<p>
+					There are 2 players, each player tries to maximise their utility at the cost of the other player. It works by doing a complete depth first search of the state space and returns the strategy with the highest utility. Minimising players (opponents) will choose strategies that will minimise your expected utility.
+				</p>
+				<code><p>
+					<b>function</b> MINIMAX-SEARCH (<i>game,state</i>) <b>returns</b> <i>strategy</i><br>
+					&emsp;<b>let</b> <i>optimalExpectedUtility,optimalStrategy</i> = MAX-VALUE(<i>game,state</i>)<br>
+					&emsp;<b>return</b> <i>optimalStrategy</i>
+				</p></code>
+				<code><p>
+					<b>function</b> MAX-VALUE (<i>game,state</i>) <b>returns</b> <i>(utility,strategy) pair</i><br>
+					&emsp;<b>if</b> <i>game</i>.IsTerminal(<i>state</i>) <b>then return</b> <i>game</i>.Utility(<i>state</i>),<i>null</i><br>
+					&emsp;<b>let</b> <i>maxUtility</i> = -&infin;<br>
+					&emsp;<b>for each</b> <i>action</i> <b>in</b> <i>game</i>.Actions(<i>state</i>) <b>do</b><br>
+					&emsp;&emsp;<b>let</b> <i>currentUtility,currentStrategy</i> = MIN-VALUE(<i>game,game.</i>GenerateNextState(<i>state,action</i>))<br>
+					&emsp;&emsp;<b>if</b> <i>currentUtility</i> &gt; <i>maxUtility</i> <b>then</b><br>
+					&emsp;&emsp;&emsp;<i>maxUtility,optimalStrategy</i> = <i>currentUtility,currentStrategy</i><br>
+					&emsp;<b>return</b> <i>maxUtility,optimalStrategy</i>
+				</p></code>
+				<code><p>
+					<b>function</b> MIN-VALUE (<i>game,state</i>) <b>returns</b> <i>(utility,strategy) pair</i><br>
+					&emsp;<b>if</b> <i>game</i>.IsTerminal(<i>state</i>) <b>then return</b> <i>game</i>.Utility(<i>state</i>),<i>null</i><br>
+					&emsp;<b>let</b> <i>minUtility</i> = &infin;<br>
+					&emsp;<b>for each</b> <i>action</i> <b>in</b> <i>game</i>.Actions(<i>state</i>) <b>do</b><br>
+					&emsp;&emsp;<b>let</b> <i>currentUtility,currentStrategy</i> = MAX-VALUE(<i>game,game.</i>GenerateNextState(<i>state,action</i>))<br>
+					&emsp;&emsp;<b>if</b> <i>currentUtility</i> &lt; <i>minUtility</i> <b>then</b><br>
+					&emsp;&emsp;&emsp;<i>minUtility,optimalStrategy</i> = <i>currentUtility,currentStrategy</i><br>
+					&emsp;<b>return</b> <i>minUtility,optimalStrategy</i>
+				</p></code>
+				<p>
+					The Minimax algorithm is complete and optimal only for finite problems and against rational opponents. It has a time complexity of O(b<sup>d</sup>) and a space complexity of O(bd) or O(d) (depending on implementation). The downside of this algorithm is that the whole game tree must be explored, which will take a long time for complex games such as chess.
+				</p>
+			</section>
+			<section>
+				<h2>Alpha Beta Pruning</h2>
+				<p>
+					Prune branches of the game tree that are obsolete.
+				</p>
+				<p>
+					Explain pruning
+				</p>
+				<p>
+					Pruning does not effect the solution but lowers the time complexity of minimax (but not space complexity). The order of strategies matter and with perfect ordering, the time complexity can be reduced to O(b<sup>d/2</sup>).
+				</p>
+			</section>
+			<section>
+				<h2>How To Improve Minimax</h2>
+				<p>
+					There are 2 main ways to improve minimax search. One is to use evaluation functions and the other is to use expectiminimax when dealing with irrational opponents.
+				</p>
+				<h3>Evaluation Functions</h3>
+				<p>
+					Evaluation Functions are a type of heuristic that is used to estimate the utility of a strategy. Better evaluation functions will take into account more data and adjust the expected utility accordingly. For example, in chess taking a queen will have a larger impact on the game than taking a pawn, so a good evaluation function will prioritise the taking of queens over pawns.
+				</p>
+				<p>
+					Evaluation functions may also reduce the complexity of a search problem when combined with iterative deepening depth first search. It does this by heuristically cutting off low utility branches before they are fully explored.
+				</p>
+				<h3>Expectiminimax</h3>
+				<p>
+					If we assume that our opponent does not act rationally, we can increase our utility even further. 
+				</p>
+			</section>
 		</main>
 	</body>
 </html>
