@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-gb">
 	<head>
 		<title>Uniprocessor Architecture Notes</title>
 		<link rel="stylesheet" href="../css/semester-notes-style.css"/>
@@ -8,7 +8,7 @@
 		<main>
 			<h1>Uniprocessor architecture</h1>
 			<p>
-				The most common uniprocessor architecture is the Von Neumann architecture. These architectures can only do 1 calculation at a time (as opposed to parrallel architectures). Computer architectures are abstractions (generalisations) that allow programs to be run on different types of machines.
+				The most common uniprocessor architecture is the Von Neumann architecture. These architectures can only do 1 calculation at a time (as opposed to parallel  architectures). Computer architectures are abstractions (generalisations) that allow programs to be run on different types of machines.
 			</p>
 			<section>
 				<h2>Von Neumann Architecture</h2>
@@ -22,32 +22,33 @@
 					Humans can interface with the computer using input and output devices or <abbr title="Input Output">IO</abbr>. These are connected to the Control Unit.
 				</p>
 				<figure>
-					<img src=".\Img\Von-Neumann-Arch.png" alt="Diagram of Von Neumann Architecture"></img>
+					<img src="./Img/Von-Neumann-Arch.png" alt="Diagram of Von Neumann Architecture">
 					<figcaption>Figure 1 - Diagram of Von Neumann Architecture</figcaption>
 				</figure>
 			</section>
 			<section>
 				<h2>Von Neumann Bottleneck</h2>
 				<p>
-					As mentioned above, in order for the <abbr>ALU</abbr> to be in continuous operation, data must be fed into the <abbr>ALU</abbr> quickly. However, more often than not, this is not achieved - causing the <abbr>ALU</abbr> to spend much of the time waiting for the next instruction. This is often due to the fact that the shared memory that the Von Neumann architecture uses, also limits <a href="">throughput</a> (data transfer rate) between the memory and the <abbr>CPU</abbr> as instructions and data cannot be accessed at the same time. This problem becomes more severe with fast operations on large amounts of data.
+					As mentioned above, in order for the <abbr>ALU</abbr> to be in continuous operation, data must be fed into the <abbr>ALU</abbr> quickly. However, this is often not achieved - causing the <abbr>ALU</abbr> to spend much of the time waiting for the next instruction. This is often due to the fact that the shared memory that the Von Neumann architecture uses, also limits <a href="">throughput</a> (data transfer rate) between the memory and the <abbr>CPU</abbr> as instructions and data cannot be accessed at the same time. This problem becomes more severe with fast operations on large amounts of data.
 				</p>
 				<p>
 					There are 2 main ways to limit the Von Neumann Bottleneck, they are:
-					<ol>
-						<li>Alternative Architectures (e.g. Harvard Architecture)</li>
-						<li>Minimising use of main memory</li>
+				</p>
+				<ol>
+					<li>Alternative Architectures (e.g. Harvard Architecture)</li>
+					<li>Minimising use of main memory
 						<ul>
 							<li>Caching</li>
 							<li>Internal Registers</li>
 						</ul>
-					</ol>
-				</p>
+					</li>
+				</ol>
 				<h3>Harvard Architecture</h3>
 				<p>
-					Unlike the Von Neumann Architecture, Harvard Architecture does use seperate memory stores for instructions and data. This allows the <abbr>ALU</abbr> and Control Unit to access the memory simultaneously. This increase in performance is offset by a decrease in flexibility (memory is also smaller). Therefore it is only used in specialised hardware like microcontrollers and embedded systems (like an Arduino), or in processors that are programmed to utilise the simultaneous access to memory. Harvard Architecture has been modified over the years to improve its performance. These include providing a data pathway between the 2 storages, resulting in only 1 loading mechanism from store to <abbr>CPU</abbr> and having seperate caching for data and instructions, but a single store - allowing a processor to function in Harvard or Von Neumann mode.
+					Unlike the Von Neumann Architecture, Harvard Architecture does use separate memory stores for instructions and data. This allows the <abbr>ALU</abbr> and Control Unit to access the memory simultaneously. This increase in performance is offset by a decrease in flexibility (memory is also smaller). Therefore, it is only used in specialised hardware like microcontrollers and embedded systems (like an Arduino), or in processors that are programmed to utilise the simultaneous access to memory. Harvard Architecture has been modified over the years to improve its performance. These include providing a data pathway between the 2 storages, resulting in only 1 loading mechanism from store to <abbr>CPU</abbr> and having separate caching for data and instructions, but a single store - allowing a processor to function in Harvard or Von Neumann mode.
 				</p>
 				<figure>
-					<img src=".\Img\Harvard-Arch.png" alt="Diagram of Harvard Architecture"></img>
+					<img src="./Img/Harvard-Arch.png" alt="Diagram of Harvard Architecture">
 					<figcaption>Figure 2 - Diagram of Harvard Architecture</figcaption>
 				</figure>
 				<h3>Caching</h3>

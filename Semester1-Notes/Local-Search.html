@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-gb">
 	<head>
 		<title>Local Search Notes</title>
 		<link rel="stylesheet" href="../css/semester-notes-style.css"/>
@@ -8,7 +8,7 @@
 		<main>
 			<h1>Local Search</h1>
 			<p>
-				Local Search differs from other algorithms such as depth first and A* search. We use Local Search when we are interested only in the goal state and the path is irrelevent. It is useful when the state space is too large, the evaluation function is computationally expensive or when optimality is not required.
+				Local Search differs from other algorithms such as depth first and A* search. We use Local Search when we are interested only in the goal state and the path is irrelevant. It is useful when the state space is too large, the evaluation function is computationally expensive or when optimality is not required.
 			</p>
 			<section>
 				<h2>How Local Search works</h2>
@@ -22,7 +22,7 @@
 					Local Search can solve an optimisation problem by finding the best state according to an objective function. The optimisation starts with a random initial state. The agent then observes the local neighbourhood around this state. The state then changes to one with a higher utility. This process repeats until a local optimum is reached.
 				</p>
 				<p>
-					This process works very quickly to improve from a bad initial state, however it is often not optimal. This is because the objective function is likely to be non-convex. This will cause the process to possibly end on a local maxima, rather than a global maxima. One must also be aware of ridges (sequence of local maxima) and plateaus (areas of constant utility), which may make the agent fail to terminate (i.e not complete). The algorithm is also greedy - It does not look beyond the small neighbourhood.
+					This process works very quickly to improve from a bad initial state, however it is often not optimal. This is because the objective function is likely to be non-convex. This will cause the process to possibly end on a local maxima, rather than a global maxima. One must also be aware of ridges (sequence of local maxima) and plateaus (areas of constant utility), which may make the agent fail to terminate (i.e. not complete). The algorithm is also greedy - It does not look beyond the small neighbourhood.
 				</p>
 				<figure>
 					<img src="./Img/Optimisation-Problem.png" alt="Example Optimisation Problem">
@@ -36,7 +36,7 @@
 				</p>
 				<h3>Hill Climbing with sideways move</h3>
 				<p>
-					If the agent is at a local maxima, the agent will be able to move sideways along the local maxima, as long as the utility does not decrease (i.e a shoulder or a plateau). This will help if the local maxima is a shoulder, however a plateau will cause the agent to wander aimlessly - so a limit on sideways moves must be set.
+					If the agent is at a local maxima, the agent will be able to move sideways along the local maxima, as long as the utility does not decrease (i.e. a shoulder or a plateau). This will help if the local maxima is a shoulder, however a plateau will cause the agent to wander aimlessly - so a limit on sideways moves must be set.
 				</p>
 				<h3>Hill Climbing with random restarts</h3>
 				<p>
@@ -74,7 +74,7 @@
 					Then a fitness evaluation occurs on each individual state. States that have a fitness below a certain threshold may be culled or they may be less likely to reproduce.
 				</p>
 				<p>
-					States that are allowed to reproduce may then perform crossover with their partner. This is when a random section of the genetic code is swapped with the partner (as in crossover with chromosomes).
+					States that can reproduce may then perform crossover with their partner. This is when a random section of the genetic code is swapped with the partner (as in crossover with chromosomes).
 				</p>
 				<p>
 					There is also a random chance for mutation to occur, where a single bit in the gene is flipped.
@@ -83,7 +83,7 @@
 					The simulation ends after a fixed number of generations (normally 100), or if the execution has taken too long, or if the standard deviation of the fitness' drops too much, or if fitness no longer improves.
 				</p>
 				<p>
-					The genetic algorithm does not guarantee a global optimal, however it is easy to parallise and implement. However, its success is dependant on a good fitness function and initial conditions (population size, mutation rate etc.)
+					The genetic algorithm does not guarantee a global optimal, however it is easy to parallelise and implement. However, its success is dependent on a good fitness function and initial conditions (population size, mutation rate etc.)
 				</p>
 			</section>
 		</main>

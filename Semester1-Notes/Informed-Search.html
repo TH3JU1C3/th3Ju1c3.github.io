@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-gb">
 	<head>
 		<title>Informed Search Notes</title>
 		<link rel="stylesheet" href="../css/semester-notes-style.css"/>
@@ -22,7 +22,7 @@
 			<section>
 				<h2>Greedy Best First Search</h2>
 				<p>
-					This algorithm chooses the node that it believes to be closest to the goal based on the heuristic function. It does not take into account the actual cost of the actions. i.e. it will always choose the node in the frontier with the smallest heuristic cost.
+					This algorithm chooses the node that it believes to be closest to the goal based on the heuristic function. It does not consider the actual cost of the actions. i.e. it will always choose the node in the frontier with the smallest heuristic cost.
 				</p>
 				<p>
 					Greedy best first search is complete in a finite state space, but it is not optimal. Its Time and Space Complexity is O(number of stages), however with a good heuristic this can be reduced substantially to O(bm).
@@ -31,13 +31,13 @@
 			<section>
 				<h2>A* Search</h2>
 				<p>
-					A* Search is like a combination of Best First Search and Uniform Cost, taking the optimality of Uniform Cost, while retaining the speed of Best First. It works by choosing the node in the frontier with the smallest actual cost + smallest heuristic cost. i.e the evaluation function f(<i>n</i>) = g(<i>n</i>) + h(<i>n</i>) where g is the cost of an action and h is the heuristic cost. The node with the smallest evaluation function is the one that is chosen.
+					A* Search is like a combination of Best First Search and Uniform Cost, taking the optimality of Uniform Cost, while retaining the speed of Best First. It works by choosing the node in the frontier with the smallest actual cost + smallest heuristic cost. i.e. the evaluation function f(<i>n</i>) = g(<i>n</i>) + h(<i>n</i>) where g is the cost of an action and h is the heuristic cost. The node with the smallest evaluation function is the one that is chosen.
 				</p>
 				<p>
-					A* Search is complete. However <b>A* Tree Search</b> is only optimal if the heuristic is <b id="admissible-definition">admissible</b>. Admissible heuristics mean those that do not overestimate the actual cost to reach the goal. For example if a node A has an actual cost of 5km to goal node B, then h(A) &le; 5. Euclidean Distance is always admissible for route finding problems.
+					A* Search is complete. However, <b>A* Tree Search</b> is only optimal if the heuristic is <b id="admissible-definition">admissible</b>. Admissible heuristics mean those that do not overestimate the actual cost to reach the goal. For example, if a node A has an actual cost of 5km to goal node B, then h(A) &le; 5. Euclidean Distance is always admissible for route finding problems.
 				</p>
 				<p>
-					For A* Graph Search to be optimal, the heuristic must be <b>consistant</b>. Consistant heuristics are admissible heuristics that satisfy the triangle inequality for all nodes in the graph - that is to say, h(n) &le; g(n') + h(n') where n is a node and n' is a successor node of n. Euclidean Distance is also always consistant for route finding problems.
+					For A* Graph Search to be optimal, the heuristic must be <b>consistent</b>. Consistent heuristics are admissible heuristics that satisfy the triangle inequality for all nodes in the graph - that is to say, h(n) &le; g(n') + h(n') where n is a node and n' is a successor node of n. Euclidean Distance is also always consistent for route finding problems.
 				</p>
 				<p>
 					A* Search is optimally efficient, which means that any search algorithm with the same heuristic must expand all nodes that are expanded by A*. However, for most problems, the complexity is still exponential.

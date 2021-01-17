@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-gb">
 	<head>
 		<title>Adversarial Search Notes</title>
 		<link rel="stylesheet" href="../css/semester-notes-style.css"/>
@@ -8,19 +8,19 @@
 		<main>
 			<h1>Adversarial Search</h1>
 			<p>
-				Ocassionally, some problems (i.e. games) have multiple opposing players. For zero sum games, using adverserial search can help you find the optimal strategy that you can make in a game.
+				Occasionally, some problems (i.e. games) have multiple opposing players. For zero sum games, using adversarial search can help you find the optimal strategy that you can make in a game.
 			</p>
 			<section>
 				<h2>Minimax Algorithm</h2>
 				<p>
 					There are 2 players, each player tries to maximise their utility at the cost of the other player. It works by doing a complete depth first search of the state space and returns the strategy with the highest utility. Minimising players (opponents) will choose strategies that will minimise your expected utility.
 				</p>
-				<code><p>
+				<p><code>
 					<b>function</b> MINIMAX-SEARCH (<i>game,state</i>) <b>returns</b> <i>strategy</i><br>
 					&emsp;<b>let</b> <i>optimalExpectedUtility,optimalStrategy</i> = MAX-VALUE(<i>game,state</i>)<br>
 					&emsp;<b>return</b> <i>optimalStrategy</i>
-				</p></code>
-				<code><p>
+				</code></p>
+				<p><code>
 					<b>function</b> MAX-VALUE (<i>game,state</i>) <b>returns</b> <i>(utility,strategy) pair</i><br>
 					&emsp;<b>if</b> <i>game</i>.IsTerminal(<i>state</i>) <b>then return</b> <i>game</i>.Utility(<i>state</i>),<i>null</i><br>
 					&emsp;<b>let</b> <i>maxUtility</i> = -&infin;<br>
@@ -29,8 +29,8 @@
 					&emsp;&emsp;<b>if</b> <i>currentUtility</i> &gt; <i>maxUtility</i> <b>then</b><br>
 					&emsp;&emsp;&emsp;<i>maxUtility,optimalStrategy</i> = <i>currentUtility,currentStrategy</i><br>
 					&emsp;<b>return</b> <i>maxUtility,optimalStrategy</i>
-				</p></code>
-				<code><p>
+				</code></p>
+				<p><code>
 					<b>function</b> MIN-VALUE (<i>game,state</i>) <b>returns</b> <i>(utility,strategy) pair</i><br>
 					&emsp;<b>if</b> <i>game</i>.IsTerminal(<i>state</i>) <b>then return</b> <i>game</i>.Utility(<i>state</i>),<i>null</i><br>
 					&emsp;<b>let</b> <i>minUtility</i> = &infin;<br>
@@ -39,7 +39,7 @@
 					&emsp;&emsp;<b>if</b> <i>currentUtility</i> &lt; <i>minUtility</i> <b>then</b><br>
 					&emsp;&emsp;&emsp;<i>minUtility,optimalStrategy</i> = <i>currentUtility,currentStrategy</i><br>
 					&emsp;<b>return</b> <i>minUtility,optimalStrategy</i>
-				</p></code>
+				</code></p>
 				<p>
 					The Minimax algorithm is complete and optimal only for finite problems and against rational opponents. It has a time complexity of O(b<sup>d</sup>) and a space complexity of O(bd) or O(d) (depending on implementation). The downside of this algorithm is that the whole game tree must be explored, which will take a long time for complex games such as chess.
 				</p>
@@ -53,7 +53,7 @@
 					Explain pruning
 				</p>
 				<p>
-					Pruning does not effect the solution but lowers the time complexity of minimax (but not space complexity). The order of strategies matter and with perfect ordering, the time complexity can be reduced to O(b<sup>d/2</sup>).
+					Pruning does not affect the solution but lowers the time complexity of minimax (but not space complexity). The order of strategies matter and with perfect ordering, the time complexity can be reduced to O(b<sup>d/2</sup>).
 				</p>
 			</section>
 			<section>
