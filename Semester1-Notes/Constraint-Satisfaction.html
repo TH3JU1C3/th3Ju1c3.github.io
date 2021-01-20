@@ -5,5 +5,44 @@
 		<link rel="stylesheet" href="../css/semester-notes-style.css"/>
 	</head>
 	<body>
+		<main>
+			<h1>Constraint Satisfaction</h1>
+			<p>
+				Constraint Satisfaction is a method that attempt to solve problems by assigning values (that are part of the <b>Domain</b>) to <b>variables</b> which must satisfy certain <b>constraints</b> to create an acceptable solution. An example of a problem that could be solved with constraint satisfaction is soduku. In soduku each cell is a variable, the domain (acceptable values that can be assigned) is the set of numbers 1 to 9 and the constraints are all variables in a single row/column/3 &times; 3 square are different.
+			</p>
+			<h2>Terminology</h2>
+			<p>
+				If an assignment of variables does not violate the constraints of the problem, it is known as consistent. If all variables are assigned a value from the domain, it is known as complete. If an assignment is complete and consistent, then it is a solution. Partial asignments are those that only some variables have values. Partial solutions are partial assignments that are consistent.
+			</p>
+			<p>
+				Variables in <abbr title = "Constraint Satisfaction Problems">CSP</abbr> can be discrete (finite or infinite) or continuous. Constraints can be unary (involving only one variable e.g. x &ne; 2), binary (involving 2 variables e.g. x &lt; y) or global (involving an arbitrary number of variables e.g. all variables cannot equal another variable). Constraints can also be hard (must not be broken e.g. two events occuring at the same time cannot have the same priority) or soft (preferable but can be broken e.g. try to schedule lessons in the afternoon rather than in the morning).
+			</p>
+			<section>
+				<h2>Solving Constraint Satisfaction Problems</h2>
+				<p>
+					<abbr>CSP</abbr> can be formulated as a constraint graph (where nodes are variables and arcs are the constraints). This allows <abbr>CSP</abbr> to be solved as a state-space search problem. However, <abbr>CSP</abbr> may solve problems with many nodes much quicker than regular search algorithms and all heuristics for <abbr>CSP</abbr> are domain independant (as opposed for things like A* Search). However, solving <abbr>CSP</abbr> by just satisfying constraints may also not be very good, especially for more complex problems. Therefore, a 3rd way that combines the two is wanted - backtracking search.
+				</p>
+				<h3>Backtracking Search</h3>
+				<p>
+					Backtracking search is a type of depth first search that is used for <abbr>CSP</abbr>. It differs from <abbr title = "Depth First Search">DFS</abbr> by changing only one variable at a time and by checking the constraints are satisfied at every level (i.e. do not consider impossible states).
+				</p>
+				<h3>Improving Backtracking Search</h3>
+				<h4>Forward Checking</h4>
+				<p>
+					When a variable is assigned, remove inconsistant options from the domains of remaing variables (filtering). When the domain of a variable is empty, you know that this attempt will not yield a solution, so you must backtrack. This allows bracktracking to occur earlier and thus saves time.
+				</p>
+				<p>
+					This can be improved even further with constraint propogation aka arc consistency (this assumes there are only binary constraints). A variable <i>X</i> is called arc-consistent with respect to variable <i>Y</i> if for every value <i>x</i> there exists some value <i>y</i> such that a pair (<i>x,y</i>) does not violate any constraint. Arc consistency is directional (so <i>X</i> may be arc consistent with <i>Y</i> but not the other way around). By enforcing arc consistency with all variables, forward checking can be vastly improved.
+				</p>
+				<h4>Ordering</h4>
+				<p>
+					By choosing which variables to assign first, we can increase the efficiency of backtracking search. We may order by variables or by values. There are 2 ways of ordering by variables, 1 way is to choose the variable with the fewest legal values left (aka minimum remaing values or fail-first). The other way of ordering by variables is called degree heuristic and involves choosing the variable which is involved in the most number of constraints (i.e. the node with the most direct connections). In order to order by value, you would use the least-constraining value heuristic. This means that the value that is chosen should be one that results in the least effect on the other unassigned variables (i.e. dont pick a value that eliminates all possible options for another variable). This however requires computation to use as it involves filtering.
+				</p>
+				<h3>Local Search</h3>
+				<p>
+					Many <abbr>CSP</abbr> can be solved with Local Search as well using the minimum conflicts heuristic. Essentially, all variables are assigned a value (assignment is complete) and while this assignment is not consistent, random conflicting variables are changed to become less conflicting until a solution is reached.
+				</p>
+			</section>
+		</main>
 	</body>
 </html>
