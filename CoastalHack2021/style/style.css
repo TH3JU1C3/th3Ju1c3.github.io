@@ -1,0 +1,40 @@
+@font-face {
+	font-family: Karmatic-Arcade;
+	src: url(../Font/ka1.ttf);
+}
+body{
+	background-color: bisque;
+	font-family: Karmatic-Arcade;
+}
+h1{
+	text-align: center;
+}
+canvas {
+	padding: 0;
+	margin: auto;
+	display: block;
+	width: 1024px;
+	height: 448px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}	
+aside {
+	width: 300px;
+	float: right;
+}
+.asset{
+	display: none;
+}
+a.button {
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
+	margin: 15px;
+	text-decoration: none;
+	color: initial;
+	display: block;
+	text-align: center;
+}
