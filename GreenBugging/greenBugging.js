@@ -4,18 +4,20 @@ context.textBaseline = "bottom";
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 const consolasWidth = 1126/2048 * 18;
+const animationTextSpeed = 40;
 
 let showHints=false;
 let userSelected = [];
 let showArrow = false;
 let lessonNum = 0;
 let stage = 0;
+let invalidHits = 0;
 
 
 function displayIDE() {
     displayMenuBar();
-    displayEditorArea();
     displayFileExplorer();
+    displayEditorArea();
 	displayConsoleArea();
 }
 
@@ -64,13 +66,13 @@ function displayFileExplorer() {
 
     // Add text
     context.fillStyle = '#000';
-    context.font = '14px Consolas';
+    context.font = '18px Consolas';
     context.fillText('File Explorer', 620, 100);
 }
 
 function displayConsoleArea() {
     context.fillStyle = '#ccc';
-    context.fillRect(0, canvasHeight*0.8, canvasWidth*0.75, canvasHeight*0.2);
+    context.fillRect(0, canvasHeight*0.8, canvasWidth, canvasHeight*0.2);
 }
 
 function displayCode(code) {
@@ -87,8 +89,7 @@ function displayCode(code) {
         }
 		
 		const deltaTime = timestamp - lastTime;
-		const speed = 40;
-		if (deltaTime >= speed) {
+		if (deltaTime >= animationTextSpeed) {
 
             // Print next character
 			if (currentChar < code[currentLine].length) {
@@ -164,12 +165,12 @@ function runCode() {
         if (selection["buggy"]) {
             highlightSelection(selection, "#0f0", "#000"); // Green if user correctly selected
         } else {
-            highlightSelection(selection, "#f00", "#000"); // Red otherwise
+            highlightSelection(selection, "#fa0", "#000"); // Orange otherwise
 			incorrect.push(index);
         }
     }
 	displayConsoleArea();
-	displayConsoleText2(incorrect.length);
+	displayConsoleText2(incorrect);
 	
 	for (let i of incorrect) {
 		const index = userSelected.indexOf(i);
@@ -182,22 +183,35 @@ function toggleHints() {
 	highlightSelectableCode(codeLessons[lessonNum]["codeSelect"]);
 }
 
-function displayConsoleText2(incorrect) {
+function displayConsoleText2(incorrect_selected) {
+	const incorrect  = incorrect_selected.length;
 	context.fillStyle = '#000';
 	context.font = '18px Consolas';
 	const bugsPresent = codeLessons[lessonNum]["bugsPresent"];
 	
 	if (incorrect == 0) {
-		context.fillText(`WELL DONE! YOU FOUND ALL ${bugsPresent} BUGS!`, 40, 440);
+		context.fillText(`WELL DONE! YOU FOUND ALL ${bugsPresent} BUGS!`, 20, 440);
+		for (let i = 0; i < userSelected.length; i++) {
+			let feedback = codeLessons[lessonNum]["codeSelect"][userSelected[i]]["feedback"];
+			if (feedback == null) {continue;}
+			context.fillText(feedback, 20, 460+(i*20));
+		}
 		context.fillStyle = '#fff';
-		drawArrow(600, 400, 150, 50);
+		drawArrow(600, 300, 150, 50);
 		context.fillStyle = "#000";
-		context.fillText("Next Level", 610, 435);
+		context.fillText("Next Level", 610, 335);
 		
 	}
 	else {
-		context.fillText(`You correctly found ${bugsPresent - incorrect} bugs. There are ${incorrect} more to find`, 40, 440);
-		context.fillText(`You have selected ${userSelected.length - incorrect}/${bugsPresent} sections to review`, 40, 460);
+		context.fillText(`You correctly found ${bugsPresent - incorrect} bugs. There are ${incorrect} more to find. Good effort so far!`, 20, 440);
+		//context.fillText(`You have selected ${userSelected.length - incorrect}/${bugsPresent} sections to review`, 20, 460);
+		for (let i = 0; i < incorrect_selected.length; i++) {
+			console.log(incorrect_selected);
+			console.log(codeLessons[lessonNum]["codeSelect"][incorrect_selected[i]]["feedback"]);
+			let feedback = codeLessons[lessonNum]["codeSelect"][incorrect_selected[i]]["feedback"];
+			if (feedback == null) {continue;}
+			context.fillText(feedback, 20, 460+(i*20));
+		}
 	}
 }
 
@@ -206,13 +220,13 @@ function displayConsoleText() {
 	context.font = '18px Consolas';
 	const bugsPresent = codeLessons[lessonNum]["bugsPresent"];
 	if (bugsPresent > 1) {
-		context.fillText(`There are ${codeLessons[lessonNum]["bugsPresent"]} bugs in the code`, 40, 440);
+		context.fillText(`There are ${codeLessons[lessonNum]["bugsPresent"]} bugs in the code`, 20, 440);
 	}
-	else {context.fillText(`There is ${codeLessons[lessonNum]["bugsPresent"]} bug in the code`, 40, 440);}
+	else {context.fillText(`There is ${codeLessons[lessonNum]["bugsPresent"]} bug in the code`, 20, 440);}
 	
-	context.fillText(`You have selected ${userSelected.length}/${bugsPresent} sections to review`, 40, 460);
+	context.fillText(`You have selected ${userSelected.length}/${bugsPresent} sections to review`, 20, 460);
 	if (bugsPresent - userSelected.length == 0) {
-		context.fillText("Click Run to check your code", 40, 480);
+		context.fillText("Click Run to check your code", 20, 480);
 	}
 }
 
@@ -240,9 +254,11 @@ function userCodeSelection(lineNumber, charClicked) {
 			}
 			displayConsoleArea();
 			displayConsoleText();
+			return true;
 			break;
 		}
 	}
+	return false;
 }
 
 function displayWhiteTextOnBlack() {
@@ -286,8 +302,7 @@ function displayWhiteTextOnBlack() {
         }
 		
 		const deltaTime = timestamp - lastTime;
-		const speed = 40;
-		if (deltaTime >= speed) {
+		if (deltaTime >= animationTextSpeed) {
 
             // Print next character
 			if (currentChar < textOut[currentLine].length) {
@@ -330,6 +345,7 @@ function callStage() {
 		displayConsoleText();
 		break;
 	}
+	hitInvalid = 0
 }
 
 function userInputStage01(x, y) {
@@ -345,11 +361,11 @@ function userInputStage2(x, y) {
 	let charClicked = Math.floor((x-40)/consolasWidth);
     let lineNumber = Math.floor((y - 50) / 20);
 	
-	let hitInvalid = true;
+	let hitInvalid = false;
 	if ((lineNumber >= 0 && lineNumber < 17) &&
 		(charClicked >= 0 && charClicked < 56)) {
-		userCodeSelection(lineNumber, charClicked);
-		hitInvalid = false;
+		hitInvalid = !userCodeSelection(lineNumber, charClicked);
+		
 	}
 	else if ((185 < x && x < 230) && (10 < y && y < 32)) {
 		if (codeLessons[lessonNum]["bugsPresent"] - userSelected.length == 0) {
@@ -359,16 +375,32 @@ function userInputStage2(x, y) {
 	else if ((245 < x && x < 300) && (10 < y && y < 32)) {
 		toggleHints();
 	}
-	else if ((600 < x && x < 750) && (375 < y && y < 475)) {
+	else if ((600 < x && x < 750) && (275 < y && y < 375)) {
 		if (showArrow) {
 			stage++;
 			userSelected = [];
 			callStage();
 		}
 	}
+	else {
+		hitInvalid = true;
+		console.log("invalid Hit")
+	}
 	if (hitInvalid) {
+		invalidHits += 1;
 		console.log(x,y,charClicked,lineNumber);
+		if (invalidHits > 3) {
+			displayConsoleArea();
+			displayConsoleText_remindHints();
+			invalidHits = 0;
+		}
     }
+}
+
+function displayConsoleText_remindHints() {
+	context.fillStyle = '#000';
+	context.font = '18px Consolas';
+	context.fillText("Feel free to click Help if you are unsure what to do :)", 20, 440);
 }
 
 canvas.addEventListener('click', function(event) {

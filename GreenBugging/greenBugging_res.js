@@ -24,14 +24,14 @@ const theoryLessons = [
 	],
 	["Theory: Energy proportionality",
 	"",
-	"Energy proportionality is the idea that computers",
+	"Energy proportionality (EP) is the idea that computers",
 	"become more energy efficient when they are running",
 	"at higher usage levels. For example, a laptop may",
 	"draw 100 watts of power at 0% CPU usage, 150W at 50%",
 	"and 175W at 100% usage. Notice how this is not a linear",
 	"process.",
 	"",
-	"You can take advantage of energy proportionality by waiting",
+	"You can take advantage of EP by waiting",
 	"to process tasks in bulk and/or in parallel."
 	],
 	["Theory: Demand Shifting",
@@ -131,12 +131,12 @@ const codeLessons = [
 		"let smallest_number = sorted_list[0];",
 		],
 	"codeSelect": [
-		{"index":0, "line":0, "start":11, "end":22, "buggy":false},
-		{"index":1, "line":1, "start":18, "end":34, "buggy":true},
-		{"index":2, "line":1, "start":35, "end":39, "buggy":false},
-		{"index":3, "line":2, "start":4, "end":19, "buggy":false},
-		{"index":4, "line":2, "start":22, "end":33, "buggy":false},
-		{"index":5, "line":2, "start":33, "end":36, "buggy":false}
+		{"index":0, "line":0, "start":11, "end":22, "buggy":false, "feedback":"A list of integers is already an efficient data structure"},
+		{"index":1, "line":1, "start":18, "end":34, "buggy":true, "feedback":"Running an inefficient algorithm will waste energy! Good work!"},
+		{"index":2, "line":1, "start":35, "end":39, "buggy":false, "feedback":"Passing the list through a sort function will return a sorted list"},
+		{"index":3, "line":2, "start":4, "end":19, "buggy":false, "feedback":"smallest_number is a good name for a variable"},
+		{"index":4, "line":2, "start":22, "end":33, "buggy":false, "feedback":"The first element of a sorted list will be the smallest"},
+		{"index":5, "line":2, "start":33, "end":36, "buggy":false, "feedback":"The first element of a sorted list will be the smallest"}
 		],
 	"bugsPresent": 1
 	},
@@ -153,13 +153,13 @@ const codeLessons = [
 		"fan.setSpeed(fan_speed);"
 		],
 	"codeSelect": [
-		{"index":0, "line":0, "start":18, "end":41, "buggy":false},
-		{"index":1, "line":1, "start":16, "end":21, "buggy":false},
-		{"index":2, "line":2, "start":4, "end":24, "buggy":false},
-		{"index":3, "line":3, "start":16, "end":22, "buggy":true},
-		{"index":4, "line":5, "start":9, "end":30, "buggy":false},
-		{"index":5, "line":6, "start":16, "end":27, "buggy":true},
-		{"index":6, "line":8, "start":13, "end":22, "buggy":false}
+		{"index":0, "line":0, "start":18, "end":41, "buggy":false, "feedback":"Amy says getCurrentTemperature will accurately give the current temperature"},
+		{"index":1, "line":1, "start":16, "end":21, "buggy":false, "feedback":"Amy thinks setting the fan speed to Low as a default is desired"},
+		{"index":2, "line":2, "start":4, "end":24, "buggy":false, "feedback":"Amy thinks having a check to see if the temperature decreases would be needed"},
+		{"index":3, "line":3, "start":16, "end":22, "buggy":true, "feedback":"Increasing the fan speed higher higher than necessary is wasteful! Good work!"},
+		{"index":4, "line":5, "start":9, "end":30, "buggy":false, "feedback":"Amy thinks having a check to see if the temperature increases would be needed"},
+		{"index":5, "line":6, "start":16, "end":27, "buggy":true, "feedback":null},
+		{"index":6, "line":8, "start":13, "end":22, "buggy":false, "feedback":"Amy says setting the fan speed to the updated value is necessary"}
 		],
 	"bugsPresent": 2
 	},
@@ -177,14 +177,14 @@ const codeLessons = [
 		"}"
 		],
 	"codeSelect": [
-		{"index":0, "line":1, "start":0, "end":10, "buggy":false},
-		{"index":1, "line":1, "start":11, "end":21, "buggy":false},
-		{"index":2, "line":2, "start":17, "end":20, "buggy":true},
-		{"index":3, "line":3, "start":18, "end":23, "buggy":true},
-		{"index":4, "line":4, "start":8, "end":13, "buggy":false},
-		{"index":5, "line":4, "start":28, "end":31, "buggy":false},
-		{"index":6, "line":5, "start":23, "end":34, "buggy":false},
-		{"index":7, "line":6, "start":25, "end":29, "buggy":false},
+		{"index":0, "line":1, "start":0, "end":10, "buggy":false, "feedback":"John says caching the task lists on a local list will lower network usage"},
+		{"index":1, "line":1, "start":11, "end":21, "buggy":false, "feedback":"John says getTasks will give all the tasks that need to be completed"},
+		{"index":2, "line":2, "start":17, "end":20, "buggy":true, "feedback":"Waiting to have a couple tasks and batching them together is well thought!"},
+		{"index":3, "line":3, "start":18, "end":23, "buggy":true, "feedback":"Executing the tasks in parallel will allow you to exploit EP! Good job!"},
+		{"index":4, "line":4, "start":8, "end":13, "buggy":false, "feedback":"John says performing this in a loop is required by the system"},
+		{"index":5, "line":4, "start":28, "end":31, "buggy":false, "feedback":"John says '> 0' this will complete all the jobs in the queue"},
+		{"index":6, "line":5, "start":23, "end":34, "buggy":false, "feedback":"Popping the tasks will remove them from the queue"},
+		{"index":7, "line":6, "start":25, "end":29, "buggy":false, "feedback":null},
 		],
 	"bugsPresent": 2
 	},
@@ -197,28 +197,29 @@ const codeLessons = [
 		"}"
 		],
 	"codeSelect": [
-		{"index":0, "line":0, "start":11, "end":14, "buggy":false},
-		{"index":1, "line":0, "start":15, "end":51, "buggy":false},
-		{"index":2, "line":1, "start":16, "end":53, "buggy":false},
-		{"index":3, "line":2, "start":17, "end":23, "buggy":true},
-		{"index":4, "line":2, "start":39, "end":49, "buggy":false},
-		{"index":5, "line":3, "start":4, "end":20, "buggy":false},
+		{"index":0, "line":0, "start":11, "end":14, "buggy":false, "feedback":"Sarah says GET is the correct syntax to access the api"},
+		{"index":1, "line":0, "start":15, "end":51, "buggy":false, "feedback":"Sarah says this API link will give her the data she needs"},
+		{"index":2, "line":1, "start":16, "end":53, "buggy":false, "feedback":"Sarah says this is how the data is structured by the API"},
+		{"index":3, "line":2, "start":17, "end":23, "buggy":true, "feedback":"Training an AI model when carbon intensity is high is a bad idea. Well Spotted!"},
+		{"index":4, "line":2, "start":39, "end":49, "buggy":false, "feedback":"Sarah thinks it would be desireable to train when carbon intensity is very low"},
+		{"index":5, "line":3, "start":4, "end":20, "buggy":false, "feedback":"Sarah says this is the correct way to call the training procedure"},
 		],
 	"bugsPresent": 1
 	},
 	{ // Support Older Hardware level
 	"code":[ 
 		"<video controls>",
-		"    <source src='4K_video.av1' type='video/av1'>",
 		"    <source src='SD_video.mp4' type='video/av1'>",
+		"    <source src='4K_video.av1' type='video/av1'>",
 		"    Your browser does not support HTML5 video",
 		"</video>",
 		],
 	"codeSelect": [
-		{"index":0, "line":1, "start":16, "end":30, "buggy":false},
-		{"index":1, "line":1, "start":36, "end":47, "buggy":false},
-		{"index":2, "line":2, "start":16, "end":30, "buggy":false},
-		{"index":3, "line":2, "start":36, "end":47, "buggy":true}
+		{"index":0, "line":1, "start":16, "end":30, "buggy":false, "feedback":"George thinks defaulting to standard video resolution wouldn't be a bad idea"},
+		{"index":1, "line":1, "start":36, "end":47, "buggy":true, "feedback":"Decoding av1 video needs special hardware the user might not have. Good Spot!"},
+		{"index":2, "line":2, "start":16, "end":30, "buggy":false, "feedback":"While 4K does use lots of data, this can be mitigated with av1 encoding"},
+		{"index":3, "line":2, "start":36, "end":47, "buggy":false, "feedback":"While 4K does use lots of data, this can be mitigated with av1 encoding"},
+		{"index":4, "line":3, "start":4, "end":45, "buggy":false, "feedback":"George says this would be displayed to older devices"}
 		],
 	"bugsPresent": 1
 	},
@@ -233,17 +234,16 @@ const codeLessons = [
 		"</iframe>"
 		],
 	"codeSelect": [
-		{"index":0, "line":1, "start":9, "end":19, "buggy":false},
-		{"index":1, "line":1, "start":20, "end":34, "buggy":false},
-		{"index":2, "line":1, "start":35, "end":42, "buggy":false},
-		{"index":3, "line":1, "start":43, "end":50, "buggy":true},
-		{"index":4, "line":2, "start":0, "end":37, "buggy":true},
-		{"index":5, "line":3, "start":9, "end":19, "buggy":false},
-		{"index":6, "line":3, "start":20, "end":35, "buggy":false},
-		{"index":7, "line":3, "start":36, "end":50, "buggy":false},
-		{"index":8, "line":5, "start":1, "end":7, "buggy":false},
-		{"index":9, "line":5, "start":12, "end":31, "buggy":false},
-		{"index":10, "line":5, "start":40, "end":47, "buggy":true}
+		{"index":0, "line":1, "start":9, "end":19, "buggy":false, "feedback":"Emma says that image 1 is needed for her client's portfolio"},
+		{"index":1, "line":1, "start":20, "end":34, "buggy":false, "feedback":"Emma says that an alt tag will improve her client's SEO"},
+		{"index":2, "line":1, "start":35, "end":50, "buggy":true, "feedback":"Setting loading to eager means the file is downloaded before it's needed"},
+		{"index":3, "line":2, "start":0, "end":37, "buggy":true, "feedback":"Not specifying the loading attribute will default it to eager - wasteful right?"},
+		{"index":4, "line":3, "start":9, "end":19, "buggy":false, "feedback":"Emma says that image 2 is needed for her client's portfolio"},
+		{"index":5, "line":3, "start":20, "end":35, "buggy":false, "feedback":"Emma says that an alt tag will improve her client's SEO"},
+		{"index":6, "line":3, "start":36, "end":50, "buggy":false, "feedback":"Emma kindly reminds you that setting loading to lazy is useful"},
+		{"index":7, "line":5, "start":1, "end":7, "buggy":false, "feedback":"Emma says that she prefers to use iframes to import videos"},
+		{"index":8, "line":5, "start":12, "end":31, "buggy":false, "feedback":"Emma says a booking video is needed to help her client secure bookings"},
+		{"index":9, "line":5, "start":32, "end":47, "buggy":true, "feedback":null}
 		],
 	"bugsPresent": 3
 	},
@@ -254,25 +254,26 @@ const codeLessons = [
 		"inside other block elements. Crazy!</div><?p>",
 		"<p>It seems you need to also need to close ",
 		"any tags! I found that out at <a href='./info.html'>",
-		"this site<a> Anyway, nice to see you all!",
+		"this site<a> Anyway, nice to see you all!</p>",
 		"<center>",
 		"    <footer><p>Lucas' Blog (c) 2024</p></footer>",
 		"</center>"
 		],
 	"codeSelect": [
-		{"index":0, "line":0, "start":0, "end":3, "buggy":false},
-		{"index":1, "line":1, "start":0, "end":4, "buggy":false},
-		{"index":2, "line":2, "start":35, "end":41, "buggy":false},
-		{"index":3, "line":2, "start":41, "end":45, "buggy":true},
-		{"index":4, "line":3, "start":0, "end":3, "buggy":false},
-		{"index":5, "line":4, "start":30, "end":52, "buggy":false},
-		{"index":6, "line":5, "start":9, "end":12, "buggy":true},
-		{"index":7, "line":6, "start":0, "end":8, "buggy":true},
-		{"index":8, "line":7, "start":4, "end":12, "buggy":false},
-		{"index":9, "line":7, "start":12, "end":15, "buggy":false},
-		{"index":10, "line":7, "start":35, "end":39, "buggy":false},
-		{"index":11, "line":7, "start":39, "end":48, "buggy":false},
-		{"index":12, "line":8, "start":0, "end":9, "buggy":true},
+		{"index":0, "line":0, "start":0, "end":3, "buggy":false, "feedback":"The <p> tag on line 1 has been opened correctly, but check the closing tag"},
+		{"index":1, "line":1, "start":0, "end":4, "buggy":false, "feedback":"While it is wise to avoid too many <div> tags, they are still valid HTML"},
+		{"index":2, "line":2, "start":35, "end":41, "buggy":false, "feedback":null},
+		{"index":3, "line":2, "start":41, "end":45, "buggy":true, "feedback":"Nice! <?p> is not the correct way to close a tag!"},
+		{"index":4, "line":3, "start":0, "end":3, "buggy":false, "feedback":"The <p> tag on line 4 is opened, and later properly closed on line 6"},
+		{"index":5, "line":4, "start":30, "end":52, "buggy":false, "feedback":"The anchor tag has been opened correctly, but check its closing tag"},
+		{"index":6, "line":5, "start":9, "end":12, "buggy":true, "feedback":"Excellent, the anchor tag wasn't closed correctly"},
+		{"index":7, "line":5, "start":41, "end":45, "buggy":false, "feedback":"The </p> tag on line 6 properly closes the one on line 4"},
+		{"index":8, "line":6, "start":0, "end":8, "buggy":true, "feedback":"Good Work! <center> is an outdated tag, you should use CSS instead"},
+		{"index":9, "line":7, "start":4, "end":12, "buggy":false, "feedback":"<footer> is a valid HTML tag"},
+		{"index":10, "line":7, "start":12, "end":15, "buggy":false, "feedback":"The <p> tag on line 8 is opened and closed properly"},
+		{"index":11, "line":7, "start":35, "end":39, "buggy":false, "feedback":"The </p> tag on line 8 is opened and closed properly"},
+		{"index":12, "line":7, "start":39, "end":48, "buggy":false, "feedback":"</footer> is a valid HTML tag"},
+		{"index":13, "line":8, "start":0, "end":9, "buggy":true, "feedback":null},
 		],
 	"bugsPresent": 4
 	}
